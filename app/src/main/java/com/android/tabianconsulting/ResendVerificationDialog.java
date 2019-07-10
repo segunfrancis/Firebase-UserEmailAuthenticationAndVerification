@@ -68,7 +68,6 @@ public class ResendVerificationDialog extends DialogFragment {
                 getDialog().dismiss();
             }
         });
-
         return view;
     }
 
