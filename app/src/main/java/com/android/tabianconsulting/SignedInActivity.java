@@ -1,6 +1,7 @@
 package com.android.tabianconsulting;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +26,24 @@ public class SignedInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signed_in);
 
         setupFirebaseAuth();
+        getUserDetails();
+    }
+
+    private void getUserDetails() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String uid = user.getUid();
+            String name = user.getDisplayName();
+            String email = user.getEmail();
+            Uri photoUrl = user.getPhotoUrl();
+
+            String properties = "uid" + uid + "\n" +
+                    "name" + name + "\n" +
+                    "email" + email + "\n" +
+                    "photoUrl" + photoUrl;
+
+            Log.d(TAG, "getUserDetails: properties: \n" + properties);
+        }
     }
 
     @Override
